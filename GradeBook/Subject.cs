@@ -13,30 +13,30 @@ namespace GradeBook
         // init
         public Subject()
         {
-            setName(" ");
-            setScore(0.0f);
+            SetName(" ");
+            SetScore(0.0f);
         }
 
         public Subject(string s_name)
         {
-            setName(s_name);
-            setScore(0.0f);
+            SetName(s_name);
+            SetScore(0.0f);
         }
 
         public Subject(float f_score)
         {
-            setName(" ");
-            setScore(f_score);
+            SetName(" ");
+            SetScore(f_score);
         }
 
         public Subject(string s_name, float f_score)
         {
-            setName(s_name);
-            setScore(f_score);
+            SetName(s_name);
+            SetScore(f_score);
         }
 
         // Methods
-        public void setName(string s_name)
+        public void SetName(string s_name)
         {
             // input cannot be empty
             if (s_name.Length == 1 && String.Equals(s_name, " ") || s_name.Length < 1)
@@ -50,12 +50,12 @@ namespace GradeBook
             }
         }
 
-        public string getName()
+        public string GetName()
         {
             return Name;
         }
 
-        public void setScore(float f_score)
+        public void SetScore(float f_score)
         {
             // score must be greater than 0.0
             if (f_score > 0.0f)
@@ -68,14 +68,14 @@ namespace GradeBook
             }
         }
         
-        public float getScore()
+        public float GetScore()
         {
             return Score;
         }
 
         override public string ToString()
         {
-            string result = "{ Subject: " + getName() + ", Score: " + getScore() + " }";
+            string result = "{ Subject: " + GetName() + ", Score: " + GetScore() + " }";
             return result;
         }
 

@@ -1,7 +1,6 @@
-using System;
 using Xunit;
 
-namespace GradeBook.Tests
+namespace GradeBook_Tests
 {
     public class GradeBook_Tests
     {

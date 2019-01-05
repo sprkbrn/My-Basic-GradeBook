@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,8 +7,12 @@ namespace GradeBook
 {
     // Subject class - Represents a single class subject
     // Contains:
-    //           (string) name
-    //           (float) score
+    //      (string) name
+    //      (float) score
+    //
+    // Overrides:
+    //      ToString
+
     public class Subject
     {
         // init
@@ -15,24 +20,28 @@ namespace GradeBook
         {
             SetName(" ");
             SetScore(0.0f);
+            scoreRank = InitRank();
         }
 
         public Subject(string s_name)
         {
             SetName(s_name);
             SetScore(0.0f);
+            scoreRank = InitRank();
         }
 
         public Subject(float f_score)
         {
             SetName(" ");
             SetScore(f_score);
+            scoreRank = InitRank();
         }
 
         public Subject(string s_name, float f_score)
         {
             SetName(s_name);
             SetScore(f_score);
+            scoreRank = InitRank();
         }
 
         // Methods
@@ -42,17 +51,17 @@ namespace GradeBook
             if (s_name.Length == 1 && String.Equals(s_name, " ") || s_name.Length < 1)
             {
                 // set a default name
-                Name = "N/A";
+                name = "N/A";
             }
             else
             {
-                Name = s_name;
+                name = s_name;
             }
         }
 
         public string GetName()
         {
-            return Name;
+            return name;
         }
 
         public void SetScore(float f_score)
@@ -60,27 +69,66 @@ namespace GradeBook
             // score must be greater than 0.0
             if (f_score > 0.0f)
             {
-                Score = f_score;
+                score = f_score;
             }
             else
             {
-                Score = 0.0f;
+                score = 0.0f;
             }
         }
         
         public float GetScore()
         {
-            return Score;
+            return score;
         }
 
+        // Convert the score from x/100 into a letter grade
+        public string GetLetterScore()
+        {
+            // ranking must have valid entries
+            if(scoreRank.Count > 0)
+            {
+                // iterate through each entry
+                foreach (KeyValuePair<string,float> rank in scoreRank)
+                {
+                    // check if the current score is greater than or equal to our sample
+                    if (GetScore() > rank.Value || rank.Value.Equals(GetScore()))
+                    {
+                        //return the key if true
+                        return rank.Key;
+                    }
+                }
+
+                return "-";
+            }
+            else
+            {
+                return "-";
+            }
+        }
+
+        // Init the ranking dict
+        private Dictionary<string,float> InitRank()
+        {
+            Dictionary<string, float> rank = new Dictionary<string, float>();
+            rank.Add("A", 90.0f);
+            rank.Add("B", 75.0f);
+            rank.Add("C", 55.0f);
+            rank.Add("D", 40.0f);
+            rank.Add("F", 0.0f);
+            return rank;
+        }
+
+        // Overrides
         override public string ToString()
         {
-            string result = "{ Subject: " + GetName() + ", Score: " + GetScore() + " }";
+            string result = "{ Subject: " + GetName() + ", Letter: " + GetLetterScore() + " }";
             return result;
         }
 
         // Data
-        private string Name;
-        private float Score;
+        private string name;
+        private float score;
+        private Dictionary<String, float> scoreRank;
     }
 }

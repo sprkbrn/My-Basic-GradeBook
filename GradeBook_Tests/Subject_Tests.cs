@@ -44,7 +44,7 @@ namespace GradeBook_Tests
         }
 
         [Fact]
-        public void SetNameWorks_InvalidInput()
+        public void SetName_InvalidInput()
         {
             Subject test_subject = new Subject();
             test_subject.SetName(" ");
@@ -52,12 +52,30 @@ namespace GradeBook_Tests
         }
 
         [Fact]
-        public void SetScoreWorks_InvalidInput()
+        public void SetScore_InvalidInput()
         {
             Subject test_subject = new Subject();
             test_subject.SetScore(-3.5f);
             Assert.Equal(0.0f, test_subject.GetScore());
         }
 
+        [Fact]
+        public void GetLetterGrade_Returns_RightGrade()
+        {
+            Subject test_subject = new Subject("Geography", 98.2f);
+            Assert.Equal("A", test_subject.GetLetterScore());
+
+            test_subject.SetScore(76f);
+            Assert.Equal("B", test_subject.GetLetterScore());
+
+            test_subject.SetScore(60.7f);
+            Assert.Equal("C", test_subject.GetLetterScore());
+
+            test_subject.SetScore(43.2f);
+            Assert.Equal("D", test_subject.GetLetterScore());
+
+            test_subject.SetScore(10.2f);
+            Assert.Equal("F", test_subject.GetLetterScore());
+        }
     }
 }

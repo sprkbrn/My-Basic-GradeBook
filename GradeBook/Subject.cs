@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GradeBook
 {
@@ -82,7 +80,7 @@ namespace GradeBook
             return score;
         }
 
-        // Convert the score from x/100 into a letter grade
+        // Convert the score into a letter grade
         public string GetLetterScore()
         {
             // ranking must have valid entries
@@ -122,7 +120,7 @@ namespace GradeBook
         // Overrides
         override public string ToString()
         {
-            string result = "{ Subject: " + GetName() + ", Letter: " + GetLetterScore() + " }";
+            string result = "{ Subject: " + GetName() + ", Grade: " + GetLetterScore() + " }";
             return result;
         }
 

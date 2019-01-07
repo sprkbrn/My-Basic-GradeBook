@@ -5,30 +5,54 @@ namespace GradeBook
 {
     public class Student
     {
-        // init
+        // empty init
         public Student()
         {
-            name = "Jeff";
+            SetName(" ", " ");
             classes = new List<Subject>();
         }
 
         // Methods
-        public void SetName(string s_name)
+        public void SetName(string f_name)
+        {
+            SetFirstName(f_name);
+        }
+
+        public void SetName(string f_name, string l_name)
+        {
+            SetFirstName(f_name);
+            SetLastName(l_name);
+        }
+
+        private void SetFirstName(string s_name)
         {
             // name cannot be empty
-            if (s_name.Length > 0 || s_name.Equals(" "))
+            if (s_name.Equals("") || s_name.Equals(" "))
             {
-                name = "Unidentified";
+                firstName = "John";
             }
             else
             {
-                name = s_name;
+                firstName = s_name;
+            }
+        }
+
+        private void SetLastName(string s_name)
+        {
+            // name cannot be empty
+            if (s_name.Equals("") || s_name.Equals(" "))
+            {
+                lastName = "Doe";
+            }
+            else
+            {
+                lastName = s_name;
             }
         }
 
         public string GetName()
         {
-            return name;
+            return firstName + " " + lastName;
         }
 
         public void AddClass(string sub_name, float score)
@@ -36,27 +60,89 @@ namespace GradeBook
             classes.Add(new Subject(sub_name, score));
         }
 
-        public void GetClass(string sub_name)
+        // retrieve the class by its name reference
+        public Subject GetGradeByClassName(string sub_name)
         {
             foreach (Subject record in classes)
             {
                 if (record.GetName() == sub_name)
                 {
-                    Console.WriteLine(record);
+                    return record;
                 }
             }
+
+            return new Subject(" ", 0.0f);
         }
 
-        public void GetAllClasses()
+        // retreieve all the classes
+        public List<Subject> GetAllGrades()
         {
-            foreach (Subject record in classes)
+            List<Subject> results = new List<Subject>();
+
+            if (classes.Count > 0)
             {
-                    Console.WriteLine(record);
+                foreach (Subject record in classes)
+                {
+                    results.Add(record);
+                }
+            }
+
+            return results;
+        }
+
+        public Subject GetHighestGrade()
+        {
+            Subject highest_grade = new Subject();
+
+            if (GetAllGrades().Count > 0)
+            {
+                if (GetAllGrades().Count > 1)
+                {
+                    foreach (Subject this_grade in GetAllGrades())
+                    {
+                        if (this_grade.GetScore() > highest_grade.GetScore())
+                        {
+                            highest_grade = this_grade;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                highest_grade = new Subject("N/A");
+            }
+
+            return highest_grade;
+        }
+
+        public Subject GetLowestGrade()
+        {
+            if (GetAllGrades().Count > 0)
+            {
+                Subject lowest_grade = classes[0];
+
+                if (GetAllGrades().Count > 1)
+                {
+                    foreach (Subject this_grade in GetAllGrades())
+                    {
+                        if (lowest_grade.GetScore() > this_grade.GetScore())
+                        {
+                            lowest_grade = this_grade;
+                        }
+                    }
+                }
+
+                return lowest_grade;
+            }
+            else
+            {
+                return new Subject();
             }
         }
 
         // data
-        string name;
-        List<Subject> classes;
+        private string firstName;
+        private string lastName;
+        private List<Subject> classes;
     }
 }

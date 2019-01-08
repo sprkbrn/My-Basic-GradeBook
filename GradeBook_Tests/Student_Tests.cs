@@ -10,30 +10,44 @@ namespace GradeBook_Tests
         public void DefaultName_Is_JohnDoe()
         {
             Student test_student = new Student();
-            Assert.Equal("John Doe", test_student.GetName());
+            Assert.Equal("John Doe", test_student.GetFullName());
         }
 
         [Fact]
         public void FirstNameInit_Is_OK()
         {
-            Student test_student = new Student();
-            test_student.SetName("Joe", " ");
-            Assert.Equal("Joe Doe", test_student.GetName());
+            Student test_student = new Student("Joe");
+            Assert.Equal("Joe Doe", test_student.GetFullName());
+        }
+
+        [Fact]
+        public void FirstNameAssignment_Is_OK()
+        {
+            Student test_student = new Student("Jerry");
+            test_student.SetFirstName("Ben");
+            Assert.Equal("Ben", test_student.GetFirstName());
         }
 
         [Fact]
         public void LastNameInit_Is_OK()
         {
+            Student test_student = new Student(" ", "French");
+            Assert.Equal("John French", test_student.GetFullName());
+        }
+
+        [Fact]
+        public void LastNameAssignment_Is_OK()
+        {
             Student test_student = new Student();
-            test_student.SetName(" ", "French");
-            Assert.Equal("John French", test_student.GetName());
+            test_student.SetLastName("Deer");
+            Assert.Equal("Deer", test_student.GetLastName());
         }
 
         [Fact]
         public void NoGrades_Is_EmptyList()
         {
             Student test_student = new Student();
-            Assert.Empty(test_student.GetAllGrades());
+            Assert.Empty(test_student.GetAllClasses());
         }
 
         [Fact]
@@ -47,7 +61,7 @@ namespace GradeBook_Tests
             Subject sub_sci = test_student.GetGradeByClassName("Science");
 
             Assert.Equal("Math", sub_math.GetName());
-            Assert.Equal("B", sub_sci.GetLetterScore());
+            Assert.Equal("B", Subject.GetLetterScore(sub_sci));
         }
 
         [Fact]
@@ -57,7 +71,7 @@ namespace GradeBook_Tests
             test_student.AddClass("Social Sciences", 82.3f);
             test_student.AddClass("Health & Wellness", 75.4f);
 
-            List<Subject> list_of_results = test_student.GetAllGrades();
+            List<Subject> list_of_results = test_student.GetAllClasses();
             Assert.Equal(2, list_of_results.Count);
         }
 

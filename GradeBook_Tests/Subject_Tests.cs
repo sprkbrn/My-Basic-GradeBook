@@ -63,19 +63,19 @@ namespace GradeBook_Tests
         public void GetLetterGrade_Returns_RightGrade()
         {
             Subject test_subject = new Subject("Geography", 98.2f);
-            Assert.Equal("A", test_subject.GetLetterScore());
+            Assert.Equal("A", Subject.GetLetterScore(test_subject));
 
             test_subject.SetScore(76f);
-            Assert.Equal("B", test_subject.GetLetterScore());
+            Assert.Equal("B", Subject.GetLetterScore(test_subject));
 
             test_subject.SetScore(60.7f);
-            Assert.Equal("C", test_subject.GetLetterScore());
+            Assert.Equal("C", Subject.GetLetterScore(test_subject));
 
             test_subject.SetScore(43.2f);
-            Assert.Equal("D", test_subject.GetLetterScore());
+            Assert.Equal("D", Subject.GetLetterScore(test_subject));
 
             test_subject.SetScore(10.2f);
-            Assert.Equal("F", test_subject.GetLetterScore());
+            Assert.Equal("F", Subject.GetLetterScore(test_subject));
         }
     }
 }

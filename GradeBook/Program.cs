@@ -6,16 +6,15 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            Student Joe = new Student();
-            Joe.SetName("Joe", "Lame");
+            Student Joe = new Student("Joe", "Camel");
 
             Joe.AddClass("Science", 70f);
             Joe.AddClass("English", 62.4f);
             Joe.AddClass("Math", 54.8f);
 
-            Console.WriteLine(Joe.GetName());
+            Console.WriteLine(Joe.GetFullName());
 
-            foreach (Subject topic in Joe.GetAllGrades())
+            foreach (Subject topic in Joe.GetAllClasses())
             {
                 Console.WriteLine(topic);
             }

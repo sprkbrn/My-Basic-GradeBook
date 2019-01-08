@@ -10,6 +10,7 @@ namespace GradeBook
     //
     // Overrides:
     //      ToString
+    //
 
     public class Subject
     {
@@ -81,16 +82,16 @@ namespace GradeBook
         }
 
         // Convert the score into a letter grade
-        public string GetLetterScore()
+        public static string GetLetterScore(Subject record)
         {
             // ranking must have valid entries
-            if(scoreRank.Count > 0)
+            if(record.scoreRank.Count > 0)
             {
                 // iterate through each entry
-                foreach (KeyValuePair<string,float> rank in scoreRank)
+                foreach (KeyValuePair<string,float> rank in record.scoreRank)
                 {
                     // check if the current score is greater than or equal to our sample
-                    if (GetScore() > rank.Value || rank.Value.Equals(GetScore()))
+                    if (record.GetScore() > rank.Value || rank.Value.Equals(record.GetScore()))
                     {
                         //return the key if true
                         return rank.Key;
@@ -120,7 +121,7 @@ namespace GradeBook
         // Overrides
         override public string ToString()
         {
-            string result = "{ Subject: " + GetName() + ", Grade: " + GetLetterScore() + " }";
+            string result = "{ Subject: " + GetName() + ", Grade: " + Subject.GetLetterScore(this) + " }";
             return result;
         }
 

@@ -54,16 +54,16 @@ namespace GradeBook
             {
                 result += student_count + ". Name: " + pupil.GetFullName() + "\n";
 
-                if (pupil.GetAllClasses().Count > 0)
+                if (pupil.GetAllSubjects().Count > 0)
                 {
-                    foreach (Subject grade in pupil.GetAllClasses())
+                    foreach (Subject grade in pupil.GetAllSubjects())
                     {
                         result += "\t" + grade + "\n";
                     }
                 }
                 else
                 {
-                    result += "\t{This student has no assigned grades}\n";
+                    result += "\t{ This student has no assigned grades }\n";
                 }
 
                 student_count += 1;

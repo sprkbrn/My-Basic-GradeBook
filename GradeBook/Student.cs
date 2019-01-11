@@ -102,7 +102,7 @@ namespace GradeBook
         }
 
         // retrieve the class by its name reference
-        public Subject GetGradeByClassName(string sub_name)
+        public Subject GetSubjectByName(string sub_name)
         {
             foreach (Subject record in classList)
             {
@@ -116,7 +116,7 @@ namespace GradeBook
         }
 
         // retreieve all items the class list
-        public List<Subject> GetAllClasses()
+        public List<Subject> GetAllSubjects()
         {
             List<Subject> results = new List<Subject>();
 
@@ -132,18 +132,18 @@ namespace GradeBook
         }
 
         // retrieve only the highest grade
-        public Subject GetHighestGrade()
+        public Subject GetHighestGradedSubject()
         {
             Subject highest_grade = new Subject();
 
             // ensure the class list isn't empty
-            if (GetAllClasses().Count > 0)
+            if (GetAllSubjects().Count > 0)
             {
                 // ensure there is more than 1 class to compare
-                if (GetAllClasses().Count > 1)
+                if (GetAllSubjects().Count > 1)
                 {
                     // iterate through each class
-                    foreach (Subject this_grade in GetAllClasses())
+                    foreach (Subject this_grade in GetAllSubjects())
                     {
                         if (this_grade.GetScore() > highest_grade.GetScore())
                         {
@@ -163,19 +163,19 @@ namespace GradeBook
         }
 
         // only the lowest grade
-        public Subject GetLowestGrade()
+        public Subject GetLowestGradedSubject()
         {
             // ensure class list isn't empty
-            if (GetAllClasses().Count > 0)
+            if (GetAllSubjects().Count > 0)
             {
                 // initial lowest is the first grade
                 Subject lowest_grade = classList[0];
 
                 // ensure there is more than 1 class to compare
-                if (GetAllClasses().Count > 1)
+                if (GetAllSubjects().Count > 1)
                 {
                     // iterate through each class
-                    foreach (Subject this_grade in GetAllClasses())
+                    foreach (Subject this_grade in GetAllSubjects())
                     {
                         if (lowest_grade.GetScore() > this_grade.GetScore())
                         {

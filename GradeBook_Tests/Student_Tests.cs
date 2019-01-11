@@ -47,7 +47,7 @@ namespace GradeBook_Tests
         public void NoGrades_Is_EmptyList()
         {
             Student test_student = new Student();
-            Assert.Empty(test_student.GetAllClasses());
+            Assert.Empty(test_student.GetAllSubjects());
         }
 
         [Fact]
@@ -57,43 +57,43 @@ namespace GradeBook_Tests
             test_student.AddClass("Math", 42.5f);
             test_student.AddClass("Science", 85.9f);
 
-            Subject sub_math = test_student.GetGradeByClassName("Math");
-            Subject sub_sci = test_student.GetGradeByClassName("Science");
+            Subject sub_math = test_student.GetSubjectByName("Math");
+            Subject sub_sci = test_student.GetSubjectByName("Science");
 
             Assert.Equal("Math", sub_math.GetName());
             Assert.Equal("B", Subject.GetLetterScore(sub_sci));
         }
 
         [Fact]
-        public void GetGrades_Returns_ListOfSubjects()
+        public void GetAllSubjects_Returns_ListOfSubjects()
         {
             Student test_student = new Student();
             test_student.AddClass("Social Sciences", 82.3f);
             test_student.AddClass("Health & Wellness", 75.4f);
 
-            List<Subject> list_of_results = test_student.GetAllClasses();
+            List<Subject> list_of_results = test_student.GetAllSubjects();
             Assert.Equal(2, list_of_results.Count);
         }
 
         [Fact]
-        public void GetHighestGrade_Returns_RightSubject()
+        public void GetHighestGradedSubject_Returns_RightSubject()
         {
             Student test_student = new Student();
             test_student.AddClass("Social Sciences", 10.3f);
             test_student.AddClass("Health & Wellness", 65.4f);
 
-            Subject result = test_student.GetHighestGrade();
+            Subject result = test_student.GetHighestGradedSubject();
             Assert.Equal("Health & Wellness", result.GetName());
         }
 
         [Fact]
-        public void GetLowestGrade_Returns_RightSubject()
+        public void GetLowestGradedSubject_Returns_RightSubject()
         {
             Student test_student = new Student();
             test_student.AddClass("Social Sciences", 42.3f);
             test_student.AddClass("Health & Wellness", 59f);
 
-            Subject result = test_student.GetLowestGrade();
+            Subject result = test_student.GetLowestGradedSubject();
             Assert.Equal("Social Sciences", result.GetName());
         }
     }

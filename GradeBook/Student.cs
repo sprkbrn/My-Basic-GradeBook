@@ -8,12 +8,13 @@ namespace GradeBook
     //      (string) firstName
     //      (string) lastName
     //
-  
+
     public class Student
     {
         // init
         public Student()
         {
+            id = ++ind;
             SetFirstName("John");
             SetLastName("Doe");
             classList = new List<Subject>();
@@ -21,6 +22,7 @@ namespace GradeBook
 
         public Student(string f_name)
         {
+            id = ++ind;
             if (f_name == " " || f_name == "")
             {
                 SetFirstName("John");
@@ -36,6 +38,7 @@ namespace GradeBook
 
         public Student(string f_name, string l_name)
         {
+            id = ++ind;
             if (f_name == " " || f_name == "")
             {
                 SetFirstName("John");
@@ -58,9 +61,50 @@ namespace GradeBook
 
         public Student(string f_name, string l_name, List<Subject> class_list)
         {
+            id = ++ind;
             SetFirstName(f_name);
             SetLastName(l_name);
             classList = class_list;
+        }
+
+        public Student(List<Subject> original)
+        {
+            id = ++ind;
+            SetFirstName("John");
+            SetLastName("Doe");
+            classList = original;
+        }
+
+        public Student(Student original)
+        {
+            id = ++ind;
+            SetFirstName(original.GetFirstName());
+            SetLastName(original.GetLastName());
+            classList = original.GetAllSubjects();
+        }
+
+        public Student(Subject original)
+        {
+            id = ++ind;
+            SetFirstName("John");
+            SetLastName("Doe");
+            classList.Add(original);
+        }
+
+        public Student(string f_name, Subject original)
+        {
+            id = ++ind;
+            SetFirstName(f_name);
+            SetLastName("Doe");
+            classList.Add(original);
+        }
+
+        public Student(string f_name, string l_name, Subject original)
+        {
+            id = ++ind;
+            SetFirstName(f_name);
+            SetLastName(l_name);
+            classList.Add(original);
         }
 
         // methods
@@ -83,20 +127,20 @@ namespace GradeBook
         {
             return firstName;
         }
-        
+
         public string GetLastName()
         {
             return lastName;
         }
 
         // add a subject to the player class list; given the name and score
-        public void AddClass(string sub_name, float score)
+        public void AddSubject(string sub_name, float score)
         {
             classList.Add(new Subject(sub_name, score));
         }
 
         // add a subject to the player class list; given a subject
-        public void AddClass(Subject new_sub)
+        public void AddSubject(Subject new_sub)
         {
             classList.Add(new_sub);
         }
@@ -131,6 +175,45 @@ namespace GradeBook
             return results;
         }
 
+        // modify the subject
+        public void EditSubject(string name, string new_name)
+        {
+            Subject grade = GetSubjectByName(name);
+            grade.SetName(new_name);
+        }
+
+        public void EditSubject(string name, float new_score)
+        {
+            Subject grade = GetSubjectByName(name);
+            grade.SetScore(new_score);
+        }
+
+        public void EditSubject(string name, string new_name, float new_score)
+        {
+            Subject grade = GetSubjectByName(name);
+            grade.SetName(new_name);
+            grade.SetScore(new_score);
+        }
+
+        // remove the subjects
+        public Boolean DropSubject(string name)
+        {
+            Subject grade = GetSubjectByName(name);
+
+            if (classList.Contains(grade) == true)
+            {
+                try
+                {
+                    classList.Remove(grade);
+                    return true;
+                }
+                catch { return false; }
+            }
+
+            return false;
+
+        }
+
         // retrieve only the highest grade
         public Subject GetHighestGradedSubject()
         {
@@ -162,7 +245,7 @@ namespace GradeBook
             return highest_grade;
         }
 
-        // only the lowest grade
+        // retrieve only the lowest grade
         public Subject GetLowestGradedSubject()
         {
             // ensure class list isn't empty
@@ -193,47 +276,32 @@ namespace GradeBook
                 return new Subject("N/A");
             }
         }
-
-        public void SetSubject()
-        {
-            List<Student> which = new List<Student>();
-
-        }
-
-        Predicate<Student> predicate = FindPred;
-        static bool FindPred(Student person)
-        {
-            return person.GetFirstName() == "Frank";
-        }
-
-        private Boolean MatchStudent(Student person)
-        {
-            return person.GetFirstName() == "Frank";
-        }
-
+        
         // overrides
         override public string ToString()
         {
             string result = "";
 
-            result += "Name: " + this.GetFullName() + "\n";
+            result += "Name: " + GetFullName() + "\tID: " + id + "\n";
 
-            if (this.classList.Count > 0)
+            if (classList.Count > 0)
             {
-                foreach (Subject s_class in this.classList)
+                foreach (Subject s_class in classList)
                 {
                     result += s_class + "\n";
                 }
             }
             else
             {
-                result += "{ This student has no assigned grades }\n";
+                result += "{ Student has no assigned grades }\n";
             }
 
             return result;
         }
 
         // data
+        static int ind = 0;
+        private int id;
         private string firstName;
         private string lastName;
         private List<Subject> classList;

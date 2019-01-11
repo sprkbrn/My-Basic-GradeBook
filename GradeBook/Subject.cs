@@ -43,6 +43,13 @@ namespace GradeBook
             scoreRank = InitRank();
         }
 
+        public Subject(Subject original)
+        {
+            SetName(original.GetName());
+            SetScore(original.GetScore());
+            scoreRank = InitRank();
+        }
+
         // Methods
         public void SetName(string s_name)
         {

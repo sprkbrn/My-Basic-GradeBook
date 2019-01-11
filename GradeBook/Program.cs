@@ -24,7 +24,15 @@ namespace GradeBook
 
             GradeBook my_grades = new GradeBook();
 
-            Console.WriteLine(my_grades.name);
+            my_grades.AddStudent(new Student("Susan", "Powers"));
+            my_grades.AddStudent(new Student("Scott", "Pillgrim"));
+
+            Student Stretch = new Student("Richard", "Reed");
+            Stretch.AddClass("Math", 90.5f);
+
+            my_grades.AddStudent(Stretch);
+
+            Console.WriteLine(my_grades);
         }
     }
 }

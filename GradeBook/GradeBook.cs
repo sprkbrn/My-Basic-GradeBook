@@ -44,6 +44,21 @@ namespace GradeBook
             }
         }
 
+        public Boolean testSomething()
+        {
+            Student reed = new Student("Richard", "Reed");
+            reed.AddClass("Math", 90.5f);
+
+            if (roster.Contains(reed) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         // overrides
         override public string ToString()
         {
@@ -52,20 +67,8 @@ namespace GradeBook
 
             foreach (Student pupil in roster)
             {
-                result += student_count + ". Name: " + pupil.GetFullName() + "\n";
-
-                if (pupil.GetAllSubjects().Count > 0)
-                {
-                    foreach (Subject grade in pupil.GetAllSubjects())
-                    {
-                        result += "\t" + grade + "\n";
-                    }
-                }
-                else
-                {
-                    result += "\t{ This student has no assigned grades }\n";
-                }
-
+                result += student_count + ". ";
+                result += pupil + "\n";
                 student_count += 1;
             }
 

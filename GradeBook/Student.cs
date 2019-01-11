@@ -63,7 +63,7 @@ namespace GradeBook
             classList = class_list;
         }
 
-        // Methods
+        // methods
         public void SetFirstName(string s_name)
         {
             firstName = s_name;
@@ -192,6 +192,45 @@ namespace GradeBook
                 // if the list is empty return an empty Subject
                 return new Subject("N/A");
             }
+        }
+
+        public void SetSubject()
+        {
+            List<Student> which = new List<Student>();
+
+        }
+
+        Predicate<Student> predicate = FindPred;
+        static bool FindPred(Student person)
+        {
+            return person.GetFirstName() == "Frank";
+        }
+
+        private Boolean MatchStudent(Student person)
+        {
+            return person.GetFirstName() == "Frank";
+        }
+
+        // overrides
+        override public string ToString()
+        {
+            string result = "";
+
+            result += "Name: " + this.GetFullName() + "\n";
+
+            if (this.classList.Count > 0)
+            {
+                foreach (Subject s_class in this.classList)
+                {
+                    result += s_class + "\n";
+                }
+            }
+            else
+            {
+                result += "{ This student has no assigned grades }\n";
+            }
+
+            return result;
         }
 
         // data

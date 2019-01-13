@@ -44,6 +44,22 @@ namespace GradeBook_Tests
         }
 
         [Fact]
+        public void SubjectInit_Is_OK()
+        {
+            Subject arts = new Subject("Arts & Crafts", 72.0f);
+            Student test_student = new Student("Lara", "Croft", arts);
+            Assert.Equal("Arts & Crafts", test_student.GetSubjectByName("Arts & Crafts").GetName());
+        }
+
+        [Fact]
+        public void StudentInit_Is_OK()
+        {
+            Student test_student = new Student("Michael", "John", new Subject("Yeah", 100f));
+            Student copy_student = new Student(test_student);
+            Assert.Equal("John", copy_student.GetLastName());
+        }
+
+        [Fact]
         public void NoGrades_Is_EmptyList()
         {
             Student test_student = new Student();

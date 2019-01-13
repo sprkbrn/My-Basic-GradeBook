@@ -7,11 +7,16 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            Book mainBook = new Book();
-            Console.WriteLine("Hello, welcome to my grade book application");
+            Book classOfAvengers = new Book();
+            Student spiderman = new Student("Peter", "Parker", new Subject("Math", 80.3f));
+            Student ironman = new Student("Tony", "Stark", new Subject("Math", 78f));
+            Student hulk = new Student("Bruce", "Banner", new Subject("Math", 92.7f));
 
-            Console.WriteLine("What is your input?");
-            string userInput = Console.ReadLine();
+            classOfAvengers.AddStudent(spiderman);
+            classOfAvengers.AddStudent(ironman);
+            classOfAvengers.AddStudent(hulk);
+
+            Book.PrintStudents(classOfAvengers);
         }
     }
 }

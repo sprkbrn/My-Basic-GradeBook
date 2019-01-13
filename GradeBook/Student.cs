@@ -59,52 +59,61 @@ namespace GradeBook
             classList = new List<Subject>();
         }
 
-        public Student(string f_name, string l_name, List<Subject> class_list)
+        public Student(string f_name, string l_name, List<Subject> subjects)
         {
             id = ++ind;
             SetFirstName(f_name);
             SetLastName(l_name);
-            classList = class_list;
+            classList = subjects;
         }
 
-        public Student(List<Subject> classes)
+        public Student(List<Subject> subjects)
         {
             id = ++ind;
             SetFirstName("John");
             SetLastName("Doe");
-            classList = classes;
+            classList = subjects;
         }
 
-        public Student(Student original)
+        public Student(Student student)
         {
             id = ++ind;
-            SetFirstName(original.GetFirstName());
-            SetLastName(original.GetLastName());
-            classList = original.GetAllSubjects();
+            SetFirstName(student.GetFirstName());
+            SetLastName(student.GetLastName());
+            classList = student.GetAllSubjects();
         }
 
-        public Student(Subject original)
+        public Student(Subject subject)
         {
             id = ++ind;
             SetFirstName("John");
             SetLastName("Doe");
-            classList.Add(original);
+            classList = new List<Subject>
+            {
+                subject
+            };
         }
 
-        public Student(string f_name, Subject original)
+        public Student(string f_name, Subject subject)
         {
             id = ++ind;
             SetFirstName(f_name);
             SetLastName("Doe");
-            classList.Add(original);
+            classList = new List<Subject>
+            {
+                subject
+            };
         }
 
-        public Student(string f_name, string l_name, Subject original)
+        public Student(string f_name, string l_name, Subject subject)
         {
             id = ++ind;
             SetFirstName(f_name);
             SetLastName(l_name);
-            classList.Add(original);
+            classList = new List<Subject>
+            {
+                subject
+            };
         }
 
         // methods
@@ -209,9 +218,7 @@ namespace GradeBook
                 }
                 catch { return false; }
             }
-
             return false;
-
         }
 
         // retrieve only the highest grade

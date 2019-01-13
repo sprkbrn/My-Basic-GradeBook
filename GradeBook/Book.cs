@@ -4,11 +4,18 @@ using System.Text;
 
 namespace GradeBook
 {
-    class Book
+    public class Book
     {
+        // init
         public Book()
         {
             roster = new List<Student>();
+        }
+
+        public Book(Student student)
+        {
+            roster = new List<Student>();
+            roster.Add(student);
         }
 
         public Book(List<Student> students)
@@ -32,6 +39,50 @@ namespace GradeBook
             roster.Add(s_pupil);
         }
 
+        // retrieve the class by its name reference
+        public Student GetStudentByFullName(string s_name)
+        {
+            foreach (Student record in roster)
+            {
+                if (record.GetFullName() == s_name)
+                {
+                    return record;
+                }
+            }
+
+            return new Student("N/A");
+        }
+
+        public List<Student> GetStudentsByFirstName(string s_name)
+        {
+            List<Student> results = new List<Student>();
+
+            foreach (Student record in roster)
+            {
+                if (record.GetFirstName() == s_name)
+                {
+                    results.Add(record);
+                }
+            }
+
+            return results;
+        }
+
+        public List<Student> GetStudentsByLastName(string s_name)
+        {
+            List<Student> results = new List<Student>();
+
+            foreach (Student record in roster)
+            {
+                if (record.GetLastName() == s_name)
+                {
+                    results.Add(record);
+                }
+            }
+
+            return results;
+        }
+
         public List<Student> GetStudentRoster()
         {
             if (roster.Count > 0)
@@ -44,6 +95,7 @@ namespace GradeBook
             }
         }
 
+        // return the contents of the book as a string
         private string BookAsString()
         {
             string result = "";
@@ -72,7 +124,7 @@ namespace GradeBook
         // static methods
         static public void PrintStudents(Book grades)
         {
-          Console.WriteLine(grades);
+            Console.WriteLine(grades);
         }
 
         static public void PrintStudents(List<Student> students)
@@ -88,7 +140,6 @@ namespace GradeBook
             {
                 Console.WriteLine("No records available.");
             }
-
         }
 
         // overrides
@@ -99,5 +150,5 @@ namespace GradeBook
 
         // data
         private List<Student> roster;
-    }
+}
 }

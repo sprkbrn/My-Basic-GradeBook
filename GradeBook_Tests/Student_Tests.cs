@@ -65,6 +65,25 @@ namespace GradeBook_Tests
         }
 
         [Fact]
+        public void GetSubjectByName_Returns_RightSubject()
+        {
+            Student test_student = new Student("John", "Doe");
+            Subject math = new Subject("Math", 30.0f);
+            Subject science = new Subject("Science", 80.0f);
+            Subject art = new Subject("Art", 10.0f);
+
+            test_student.AddSubject(math);
+            test_student.AddSubject(science);
+            test_student.AddSubject(art);
+
+            Subject result = test_student.GetSubjectByName("Art");
+            Assert.Equal(10.0f, result.GetScore());
+
+            Subject result2 = test_student.GetSubjectByName("Math");
+            Assert.Equal(30.0f, result2.GetScore());
+        }
+
+        [Fact]
         public void AddSubject_Is_OK()
         {
             Student test_student = new Student();
@@ -82,6 +101,14 @@ namespace GradeBook_Tests
             test_student.AddSubject("Science", 80.0f);
             test_student.EditSubject("Science", "Dance");
             Assert.Equal("Dance", test_student.GetSubjectByName("Dance").GetName());
+
+            Student test_student2 = new Student();
+            test_student2.AddSubject("Gym", 70.3f);
+            test_student2.AddSubject("Library", 68.6f);
+
+            test_student2.EditSubject("Library", "Personal Study", 80.0f);
+            Assert.Equal("Personal Study", test_student2.GetSubjectByName("Personal Study").GetName());
+            Assert.Equal(80.0f, test_student2.GetSubjectByName("Personal Study").GetScore());
         }
 
         [Fact]

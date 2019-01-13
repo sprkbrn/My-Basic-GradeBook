@@ -67,12 +67,12 @@ namespace GradeBook
             classList = class_list;
         }
 
-        public Student(List<Subject> original)
+        public Student(List<Subject> classes)
         {
             id = ++ind;
             SetFirstName("John");
             SetLastName("Doe");
-            classList = original;
+            classList = classes;
         }
 
         public Student(Student original)

@@ -242,6 +242,11 @@ namespace GradeBook
                         }
                     }
                 }
+                else 
+                {
+                    // there is only one grade entry; it must be the highest by default
+                    highest_grade = GetAllSubjects()[0];
+                }
             }
             else
             {
@@ -283,7 +288,63 @@ namespace GradeBook
                 return new Subject("N/A");
             }
         }
-        
+
+        public float GetAverage()
+        {
+            float total = 0f;
+            if (classList.Count > 1)
+            {
+                foreach (Subject subj in classList)
+                {
+                    total += subj.GetScore();
+                }
+
+                total /= classList.Count;
+            }
+            else
+            {
+                total += classList[0].GetScore();
+            }
+
+            return total;
+        }
+
+        // static
+        static public float GetAverage(Student student)
+        {
+            float total = 0f;
+            if (student.GetAllSubjects().Count > 1)
+            {
+                foreach (Subject subj in student.GetAllSubjects())
+                {
+                    total += subj.GetScore();
+                }
+
+                total += (total / student.classList.Count);
+            }
+            else
+            {
+                total += student.GetAllSubjects()[0].GetScore();
+            }
+
+            return total;
+        }
+
+        static public float GetAverage(List<Student> students)
+        {
+            float total = 0f;
+            if (students.Count > 0)
+            {
+                foreach (Student pupil in students)
+                {
+                    total += pupil.GetAverage();
+                }
+
+                total /= students.Count;
+            }
+            return total;
+        }
+
         // overrides
         override public string ToString()
         {

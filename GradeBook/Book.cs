@@ -121,6 +121,19 @@ namespace GradeBook
             return result;
         }
 
+        public float GetAverage()
+        {
+            float total = 0f;
+            foreach (Student pupil in roster)
+            {
+                total += pupil.GetAverage();
+            }
+
+            total /= roster.Count;
+
+            return total;
+        }
+
         // static methods
         static public void PrintStudents(Book grades)
         {
@@ -140,6 +153,19 @@ namespace GradeBook
             {
                 Console.WriteLine("No records available.");
             }
+        }
+
+        static public float GetAverage(List<Student> l_students)
+        {
+            float total = 0f;
+            foreach (Student pupil in l_students)
+            {
+                total += pupil.GetAverage();
+            }
+
+            total /= l_students.Count;
+
+            return total;
         }
 
         // overrides

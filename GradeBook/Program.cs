@@ -17,6 +17,7 @@ namespace GradeBook
             classOfAvengers.AddStudent(hulk);
 
             Book.PrintStudents(classOfAvengers);
+            Console.WriteLine("The class average is: {0:F1}/100", classOfAvengers.GetAverage());
         }
     }
 }

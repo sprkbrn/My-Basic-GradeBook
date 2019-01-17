@@ -12,8 +12,7 @@ GradeBook Application
 ------------------------------------
 This application will assist in managing your students
 and grading ruberick. Get to know who is struggling
-and who is doing great all at a glance.
-                                   developed by: Cr4$h";
+and who is doing great all at a glance.";
 
 
             UI userInterface = new UI(splash_text);

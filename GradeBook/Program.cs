@@ -1,23 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using GradeBook.Interface;
 namespace GradeBook
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Book classOfAvengers = new Book();
+            string splash_text = @"
+GradeBook Application
+------------------------------------
+This application will assist in managing your students
+and grading ruberick. Get to know who is struggling
+and who is doing great all at a glance.
+                                   developed by: Cr4$h";
+
+
+            UI userInterface = new UI(splash_text);
+            Console.Write("\n\n");
+
+            Book roster = new Book();
             Student spiderman = new Student("Peter", "Parker", new Subject("Math", 80.3f));
             Student ironman = new Student("Tony", "Stark", new Subject("Math", 78f));
             Student hulk = new Student("Bruce", "Banner", new Subject("Math", 92.7f));
 
-            classOfAvengers.AddStudent(spiderman);
-            classOfAvengers.AddStudent(ironman);
-            classOfAvengers.AddStudent(hulk);
+            roster.AddStudent(spiderman);
+            roster.AddStudent(ironman);
+            roster.AddStudent(hulk);
 
-            Book.PrintStudents(classOfAvengers);
-            Console.WriteLine("The class average is: {0:F1}/100", classOfAvengers.GetAverage());
+            userInterface.StartLoop(roster);
         }
     }
 }

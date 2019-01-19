@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GradeBook.Interface;
 namespace GradeBook
 {
@@ -14,8 +13,9 @@ This application will assist in managing your students
 and grading ruberick. Get to know who is struggling
 and who is doing great all at a glance.";
 
-
-            UI userInterface = new UI(splash_text);
+            UI userInterface = new UI();
+            userInterface.SetSplash(splash_text);
+            userInterface.PrintSplash();
             Console.Write("\n\n");
 
             Book roster = new Book();

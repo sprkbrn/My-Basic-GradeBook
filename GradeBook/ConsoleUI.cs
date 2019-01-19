@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GradeBook;
 
 namespace GradeBook.Interface
 {
@@ -28,13 +27,11 @@ namespace GradeBook.Interface
         public UI()
         {
             splashText = "The application has started";
-            Console.WriteLine(splashText);
         }
 
         public UI(string splash)
         {
             splashText = splash;
-            Console.WriteLine(splashText);
         }
 
         // methods
@@ -53,17 +50,61 @@ namespace GradeBook.Interface
             Console.WriteLine(splashText);
         }
 
+        public void PrintView(Book roster)
+        {
+            Console.WriteLine("Current Roster:\n");
+            Console.Write(roster);
+            Console.Write("\n\n");
+        }
+
+        public void PrintView(Student student)
+        {
+            Console.WriteLine("Individual Student:\n");
+            Console.Write(student);
+            Console.Write("\n\n");
+        }
+
+        public void PrintView(List<Student> student_list)
+        {
+            Console.WriteLine("Current Roster:\n");
+
+            foreach (Student pupil in student_list)
+            {
+                Console.WriteLine(pupil);
+            }
+
+            Console.Write("\n\n");
+        }
+
+        public void PrintView(Subject subj)
+        {
+            Console.WriteLine("Individual Subject:\n");
+
+            Console.WriteLine(subj);
+
+            Console.Write("\n\n");
+        }
+
+        public void PrintView(List<Subject> class_list)
+        {
+            Console.WriteLine("Subject List:\n");
+
+            foreach (Subject subj in class_list)
+            {
+                Console.WriteLine(subj);
+            }
+
+            Console.Write("\n\n");
+        }
+
         public void StartLoop(Book current_roster)
         {
             currentState = State.Running;
-
-            Console.WriteLine("Current Roster:\n");
-            Console.Write(current_roster);
-            Console.Write("\n\n");
+            PrintView(current_roster);
+            Dictionary<string, OptionType> options = GetOptions(current_roster);
 
             while (currentState == State.Running)
             {
-                Dictionary<string, OptionType> options = GetOptions(current_roster);
                 PrintOptions(options);
                 currentState = State.Stopped;
             }
